@@ -1,7 +1,7 @@
 # 📚 The Knowledge Exchange
 ### Decentralized P2P Academic Library
 
-The Knowledge Exchange is a full-stack decentralized distributed system designed for peer-to-peer (P2P) academic resource sharing. It uses a **Go (Golang)** backend with microservices architecture and a **vanilla JavaScript** frontend.
+The Knowledge Exchange is a full-stack decentralized distributed system designed for peer-to-peer (P2P) academic resource sharing. It uses a **Go (Golang)** backend with microservices architecture and a **React** frontend.
 
 ---
 
@@ -18,7 +18,7 @@ The Knowledge Exchange is a full-stack decentralized distributed system designed
 ## 🛠️ Tech Stack
 
 - **Backend**: Go 1.21+ (net/http, goroutines, channels)
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Frontend**: React + Vite
 - **Storage**: Local file system (data/sharedFiles)
 - **Networking**: TCP/HTTP for peer communication
 
@@ -28,17 +28,24 @@ The Knowledge Exchange is a full-stack decentralized distributed system designed
 
 ### Prerequisites
 - Go 1.21 or higher installed
+- Node.js and npm installed
 - A modern web browser
 
 ### Steps
 
-1. **Initialize the Module** (if not already done)
+1. **Initialize the Backend Module** (if not already done)
    ```bash
    cd backend
    go mod tidy
    ```
 
-2. **Run the Backend Server**
+2. **Install Frontend Dependencies**
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+3. **Run the Backend Server**
    ```bash
    cd backend
    go run cmd/main.go
@@ -48,11 +55,15 @@ The Knowledge Exchange is a full-stack decentralized distributed system designed
    - `-port=8080` (Default API port)
    - `-name="My Peer Name"` (Custom display name)
 
-3. **Access the Application**
-   Open your browser and navigate to:
-   [http://localhost:3000](http://localhost:3000) (or whatever port you configured)
+4. **Run the Frontend Development Server**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
 
-   *Note: The backend serves the frontend files automatically.*
+5. **Access the Application**
+   Open your browser and navigate to:
+   [http://localhost:5173](http://localhost:5173)
 
 ---
 
@@ -66,11 +77,17 @@ knowledge-exchange/
 │   ├── gateway/        # HTTP Server & Router
 │   ├── library/        # Indexing & Transfer logic
 │   ├── analytics/      # Reputation & Throttling engine
+│   ├── auth/           # Authentication logic
+│   ├── storage/        # Data persistence
 │   └── utils/          # Hashing & Network helpers
 ├── frontend/
-│   ├── css/            # Styles
-│   ├── js/             # Application Logic
-│   └── index.html      # Main UI
+│   ├── src/
+│   │   ├── components/ # Reusable UI components
+│   │   ├── pages/      # Page components
+│   │   ├── context/    # React contexts
+│   │   └── services/   # API service layer
+│   ├── public/         # Static assets
+│   └── index.html      # Main HTML template
 └── data/               # Local storage
 ```
 
@@ -78,11 +95,12 @@ knowledge-exchange/
 
 ## 🧪 Testing
 
-1. Open http://localhost:3000 in your browser.
-2. Enter a username to register as a peer.
-3. Go to the "Upload" tab and share a file (creates a dummy file in `data/sharedFiles`).
-4. See your reputation increase!
-5. Open an Incognito window to simulate a second peer.
+1. Open http://localhost:5173 in your browser.
+2. Register with a username and password.
+3. Login to access the main dashboard.
+4. Go to the "Upload" tab and share a file.
+5. See your reputation increase!
+6. Open an Incognito window to simulate a second peer.
 
 ---
 
